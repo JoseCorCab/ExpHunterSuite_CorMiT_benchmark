@@ -7,10 +7,11 @@ ADD_OPTIONS=$1
 
 
 AF_VARS=`echo "
-\\$multimir_path='',
+\\$multimir_path='', #~josecordoba/proyectos/multimir_db/p_hsa
 \\$rnaseq_input_path='',
 \\$mirnaseq_input_path='',
 \\$organism='',
+\\$ADD_OPT='',
 \\$corr_thrs=0.65;0.7;0.75;0.8;0.85;0.9
 " | tr -d [:space:]`
 

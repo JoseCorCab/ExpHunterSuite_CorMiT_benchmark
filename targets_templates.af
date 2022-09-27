@@ -2,10 +2,9 @@ launch_target_analysis_[$corr_thrs]){
 	resources: -c 16 -n cal -t '03:00:00' -m '20gb' -u 1
 	echo [cpu]
 	source ~soft_bio_267/initializes/init_degenes_hunter
-	export PATH=/mnt/home/users/bio_267_uma/josecordoba/software/ExpHunterSuite/inst/scripts:$PATH
 	?
-	miRNA_RNAseq_analysis.R -r $rnaseq_input_path -m $mirnaseq_input_path --organism $organism -R miRNA_target.html -M $multimir_path/parsed_raw_score_$organism.RData -c -(*) -u 2 -T -o results &>erro_log
-	add_mirna_mature.R -i  $mirnaseq_input_path/Common_results/hunter_results_table.txt -o ./
+	coRmiT.R -r $rnaseq_input_path -m $mirnaseq_input_path --organism $organism -R miRNA_target.html -M $multimir_path/parsed_raw_score_$organism.RData -c -(*) -u 2 -T -o results $ADD_OPT &>erro_log
+	add_mirna_mature.R -i  $mirnaseq_input_path/Common_results/hunter_results_table.txt -o results 
 }
 
 
