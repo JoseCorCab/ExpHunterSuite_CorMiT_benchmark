@@ -24,5 +24,5 @@ if [ "$module" == "1" ] ; then
 	AutoFlow -e -w targets_templates.af -V $AF_VARS -o $output $ADD_OPTIONS
 
 elif [ "$module" == "2" ] ; then
-	$CODE_PATH/launch_functional.sh
+	sbatch $CODE_PATH/launch_functional.sh
 fi
