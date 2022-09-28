@@ -6,7 +6,7 @@ ADD_OPTIONS=$1
 source $CODE_PATH/config_daemon
 
 AF_VARS=`echo "
-\\$multimir_path=$Multimir_path, #~josecordoba/proyectos/multimir_db/p_hsa
+\\$multimir_path=$Multimir_path,
 \\$rnaseq_input_path=$RNAseq_input,
 \\$mirnaseq_input_path=$miRNA_seq_input,
 \\$organism=$Organism,
