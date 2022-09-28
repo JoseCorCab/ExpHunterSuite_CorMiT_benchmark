@@ -8,7 +8,3 @@ launch_target_analysis_[$corr_thrs]){
 }
 
 
-%compare_results){
- 	?
- 	cat !launch_target_analysis_!)/strategies_stats.txt > strategies_stats.txt
-}
