@@ -10,3 +10,13 @@ launch_target_analysis_[$corr_thrs]){
 }
 
 
+%download_and_prepare_gene_phen_[$corr_thrs]){
+        #this node requires internet conexion
+        cut -f 4 !launch_target_analysis_*!/results/$strategy/target_results_table.txt | tail -n +2 |sort -u > targets_m_ensembl
+        ?
+        merge_targets_and_sim.rb targets_m_ensembl $CODE_PATH/HGNC_enemsbl_hs $hgnc_sim $MOUSE_TO_HUMAN
+        plot_sim_scatter.R !launch_target_analysis_*!/results/$strategy/target_results_table.txt ensembl_to_sem_sim.txt !launch_target_analysis_*!/results/$strategy/all_miRNA_mod_summary.txt sim_scatter
+        sort_DEG_by_similarity.R target_results_table_sim.txt sorted_target_results_table.txt
+}
+
+
