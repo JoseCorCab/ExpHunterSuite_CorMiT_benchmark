@@ -1,4 +1,4 @@
-launch_target_analysis_[$corr_thrs]){
+%launch_target_analysis_[$corr_thrs]){
 	resources: -c 16 -n cal -t '03:00:00' -m '20gb' -u 1
 	echo [cpu]
 	source ~soft_bio_267/initializes/init_degenes_hunter
@@ -18,5 +18,14 @@ launch_target_analysis_[$corr_thrs]){
         plot_sim_scatter.R !launch_target_analysis_*!/results/$strategy/target_results_table.txt ensembl_to_sem_sim.txt !launch_target_analysis_*!/results/$strategy/all_miRNA_mod_summary.txt sim_scatter
         sort_DEG_by_similarity.R target_results_table_sim.txt sorted_target_results_table.txt
 }
+
+compare_results){
+	. ~soft_bio_267/initializes/init_R
+        metric_tables=`echo !launch_target_analysis_!/results/strategies_stats.txt | tr " " ","`
+        ?
+	plot_metrics.R -d $metric_tables -s "," -o Odds_ratio.pdf
+
+}
+
 
 
