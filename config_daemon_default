@@ -13,4 +13,5 @@ export funsys=MF,BP,CC,KEGG
 export f_input_path=''
 export strategy=''
 export f_output_path=$CODE_PATH/functional_analysis
+export f_pval=0.1
 export Add_opt_enr=''
