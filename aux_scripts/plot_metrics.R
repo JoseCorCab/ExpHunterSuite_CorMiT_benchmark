@@ -47,7 +47,9 @@ option_list <- list(
     make_option(c("-s", "--sep"), type="character",
                 help="Separator character"),
     make_option(c("-m", "--metric"), type = "character", help = "Metric to plot"),
-    make_option(c("-o", "--output"), type = "character", help = "outputfile")
+    make_option(c("-o", "--output"), type = "character", help = "outputfile"),
+    make_option(c("-S", "--size"), type = "character", help = "Column to use as dot size", default= "validated_pairs"),
+    make_option(c("-y", "--y_axis"), type = "character", help = "Column to use as y axis", default = "Odds_ratio")
 
 
 )
@@ -65,9 +67,9 @@ merged_data_file <- as.data.frame(merged_data_file[merged_data_file$db_group == 
 names(merged_data_file)[names(merged_data_file) == "TP"] <- "validated_pairs"
 merged_data_file$strategy <- summarize_strategies(merged_data_file$strategy)
 # str(merged_data_file)
-pp <- ggplot(merged_data_file,aes(x=corr_cutoff, y=Odds_ratio,color = strategy)) + 
-            geom_point(aes(size = validated_pairs), stat="identity", alpha = 0.5) +
-            geom_line(aes(size = 3), stat="identity", alpha = 0.5)+
+pp <- ggplot(merged_data_file,aes_string(x="corr_cutoff", y=opt$y_axis,color = "strategy")) + 
+            geom_point(aes_string(size = opt$size), stat="identity", alpha = 0.5) +
+            geom_line(aes_string(size = 3), stat="identity", alpha = 0.5)+
             xlab("Pearson's R threshold") + ylab("Odds ratio") + 
             theme_minimal()+
       theme(legend.position="bottom", 

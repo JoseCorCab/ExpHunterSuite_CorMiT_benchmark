@@ -1,4 +1,4 @@
-launch_target_analysis_[$corr_thrs]){
+%launch_target_analysis_[$corr_thrs]){
 	resources: -c 15 -n cal -t '03:00:00' -m '20gb' -u 1
 	echo [cpu]
 	source ~soft_bio_267/initializes/init_degenes_hunter
@@ -24,6 +24,7 @@ compare_results){
         metric_tables=`echo !launch_target_analysis_!/results/strategies_stats.txt | tr " " ","`
         ?
 	plot_metrics.R -d $metric_tables -s "," -o Odds_ratio
+	plot_metrics.R -d $metric_tables -s "," -o Odds_ratio_median -S coverage -y median_OR
 
 }
 
