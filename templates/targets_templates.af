@@ -23,7 +23,7 @@ compare_results){
 	. ~soft_bio_267/initializes/init_R
         metric_tables=`echo !launch_target_analysis_!/results/strategies_stats.txt | tr " " ","`
         ?
-	plot_metrics.R -d $metric_tables -s "," -o Odds_ratio.pdf
+	plot_metrics.R -d $metric_tables -s "," -o Odds_ratio
 
 }
 

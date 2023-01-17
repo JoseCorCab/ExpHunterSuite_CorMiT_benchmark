@@ -15,7 +15,7 @@ dictionary <- list(
     "normalized_counts" = "c"
     )
   translated_strategies <- c()
-  str(dictionary)
+  # str(dictionary)
   for (strategy_name in strategies){
 
     strategies <- unlist(strsplit(strategy_name, "_RNA_vs_miRNA_"))
@@ -31,7 +31,7 @@ dictionary <- list(
                 summ_name <- c(summ_name, strategy)
         }
     }
-    str(summ_name)
+    # str(summ_name)
     translated_str <- paste(summ_name,collapse =  "_gene | miR_")
     translated_strategies <- c(translated_strategies, translated_str)
   }
@@ -64,13 +64,23 @@ merged_data_file <- data.table::rbindlist(merged_data_file)
 merged_data_file <- as.data.frame(merged_data_file[merged_data_file$db_group == "validated",])
 names(merged_data_file)[names(merged_data_file) == "TP"] <- "validated_pairs"
 merged_data_file$strategy <- summarize_strategies(merged_data_file$strategy)
-str(merged_data_file)
+# str(merged_data_file)
 pp <- ggplot(merged_data_file,aes(x=corr_cutoff, y=Odds_ratio,color = strategy)) + 
             geom_point(aes(size = validated_pairs), stat="identity", alpha = 0.5) +
             geom_line(aes(size = 3), stat="identity", alpha = 0.5)+
-      theme(legend.position="bottom", legend.box = "vertical") + 
-      scale_color_manual(breaks = unique(merged_data_file$strategy),
-                            values = colorBlindGrey8[seq(1,length(unique(merged_data_file$strategy)))])
+            xlab("Pearson's R threshold") + ylab("Odds ratio") + 
+            theme_minimal()+
+      theme(legend.position="bottom", 
+            legend.box = "vertical", 
+            axis.text = element_text(size = 17),
+            axis.title = element_text(size = 20, face = "bold"),
+            legend.text = element_text(size = 17),
+            legend.title = element_text(size=17, face = "bold")) + 
+      guides(colour = guide_legend(nrow = 4))+
+   #   scale_size_manual(name = "Validated pairs")+
+      scale_color_manual(name = "Strategy",
+                         breaks = unique(merged_data_file$strategy),
+                         values = colorBlindGrey8[seq(1,length(unique(merged_data_file$strategy)))])
 
 pdf(paste0(opt$output, ".pdf"), 10, 10)
 pp
