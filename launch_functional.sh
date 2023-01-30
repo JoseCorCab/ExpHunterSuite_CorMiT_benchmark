@@ -17,5 +17,5 @@ cut -f 2 /mnt/scratch/users/bio_267_uma/josecordoba/NGS_projects/muerte_subita_r
 
 echo -e ALL_MIRNA"\t"`cut -f 2 $all_miRNA_path/ALL_MIRNA_ATTR.txt |tail -n +2 | head -c -1 |tr "\n" ","` > $all_miRNA_path/ALL_MIRNA.txt
 
-#clusters_to_enrichment.R -p $f_pval -w 16 -i $input_path/miRNA_to_enrich.txt -g $input_path/gene_attributes.txt -o $f_output_path -f $funsys -F -O $F_organism -k ENSEMBL $Add_opt_enr &>$f_output_path/func_err
+clusters_to_enrichment.R -p $f_pval -w 16 -i $input_path/miRNA_to_enrich.txt -g $input_path/gene_attributes.txt -o $f_output_path -f $funsys -F -O $F_organism -k ENSEMBL $Add_opt_enr &>$f_output_path/func_err
 clusters_to_enrichment.R -p $f_pval -w 16 -i $all_miRNA_path/ALL_MIRNA.txt -g $all_miRNA_path/ALL_MIRNA_ATTR.txt -o $all_miRNA_path -f $funsys -F -O $F_organism -k ENSEMBL $Add_opt_enr &>$all_miRNA_path/func_err_all_miRNA
