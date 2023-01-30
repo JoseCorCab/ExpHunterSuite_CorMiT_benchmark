@@ -1,4 +1,4 @@
-%launch_target_analysis_[$corr_thrs]){
+launch_target_analysis_[$corr_thrs]){
 	resources: -c 15 -n cal -t '03:00:00' -m '20gb' -u 1
 	echo [cpu]
 	source ~soft_bio_267/initializes/init_degenes_hunter
