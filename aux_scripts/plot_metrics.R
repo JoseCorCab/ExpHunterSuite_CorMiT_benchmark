@@ -61,7 +61,7 @@ all_files <- unlist(strsplit(opt$data, opt$sep))
 merged_data_file <- data.frame()
 
 merged_data_file <- lapply(all_files, function(file){read.table(file, header = TRUE)})
-merged_data_file <- data.table::rbindlist(merged_data_file, fill = TRUE)
+merged_data_file <- data.table::rbindlist(merged_data_file)
 
 merged_data_file <- as.data.frame(merged_data_file[merged_data_file$db_group == "validated",])
 names(merged_data_file)[names(merged_data_file) == "TP"] <- "validated_pairs"
