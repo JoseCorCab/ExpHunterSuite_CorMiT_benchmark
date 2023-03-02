@@ -1,13 +1,13 @@
-launch_target_analysis_[$corr_thrs]){
+launch_target_analysis){
 	resources: -c 15 -n cal -t '03:00:00' -m '20gb' -u 1
 	echo [cpu]
 	source ~soft_bio_267/initializes/init_degenes_hunter
 	export PATH=~/software/ExpHunterSuite/inst/scripts/:$PATH
 	ADD_OPT_CORR=`echo "$ADD_OPT_corr" | tr ':' ' ' | tr ";" ","`
-	corr_thrs=`echo $corr_thrs|tr ":" ","`
+	CORR_THRS=`echo $corr_thrs|tr ":" ","`
 	?
-	coRmiT.R -r $rnaseq_input_path -m $mirnaseq_input_path --organism $organism -R miRNA_target.html -M $multimir_path/parsed_raw_score_$organism.RData -c `echo \'$corr_thrs\'` -u 2 -T -o results $ADD_OPT_CORR &>erro_log
-	echo "coRmiT.R -r $rnaseq_input_path -m $mirnaseq_input_path --organism $organism -R miRNA_target.html -M $multimir_path/parsed_raw_score_$organism.RData -c `echo \'$corr_thrs\'` -u 2 -T -o results $ADD_OPT_CORR &>erro_log"
+	coRmiT.R -r $rnaseq_input_path -m $mirnaseq_input_path --organism $organism -R miRNA_target.html -M $multimir_path/parsed_raw_score_$organism.RData -c "'"$CORR_THRS"'" -u 2 -T -o results $ADD_OPT_CORR &>erro_log
+	echo "coRmiT.R -r $rnaseq_input_path -m $mirnaseq_input_path --organism $organism -R miRNA_target.html -M $multimir_path/parsed_raw_score_$organism.RData -c `echo $corr_thrs` -u 2 -T -o results $ADD_OPT_CORR &>erro_log"
 	#add_mirna_mature.R -i  $mirnaseq_input_path/Common_results/hunter_results_table.txt -o results 
 }
 
