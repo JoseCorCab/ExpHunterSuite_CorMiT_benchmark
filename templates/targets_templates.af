@@ -5,8 +5,8 @@ launch_target_analysis_[$corr_thrs]){
 	export PATH=~/software/ExpHunterSuite/inst/scripts/:$PATH
 	ADD_OPT_CORR=`echo "$ADD_OPT_corr" | tr ':' ' ' | tr ";" ","`
 	?
-	coRmiT.R -r $rnaseq_input_path -m $mirnaseq_input_path --organism $organism -R miRNA_target.html -M $multimir_path/parsed_raw_score_$organism.RData -c -(*) -u 2 -T -o results $ADD_OPT_CORR &>erro_log
-	add_mirna_mature.R -i  $mirnaseq_input_path/Common_results/hunter_results_table.txt -o results 
+	coRmiT.R -r $rnaseq_input_path -m $mirnaseq_input_path --organism $organism -R miRNA_target.html -M $multimir_path/parsed_raw_score_$organism.RData -c `echo $corr_thrs|tr ":" ","` -u 2 -T -o results $ADD_OPT_CORR &>erro_log
+	#add_mirna_mature.R -i  $mirnaseq_input_path/Common_results/hunter_results_table.txt -o results 
 }
 
 
@@ -19,7 +19,7 @@ launch_target_analysis_[$corr_thrs]){
         sort_DEG_by_similarity.R target_results_table_sim.txt sorted_target_results_table.txt
 }
 
-compare_results){
+%compare_results){
 	. ~soft_bio_267/initializes/init_R
         metric_tables=`echo !launch_target_analysis_!/results/strategies_stats.txt | tr " " ","`
         ?
