@@ -21,6 +21,19 @@ launch_target_analysis){
         sort_DEG_by_similarity.R target_results_table_sim.txt sorted_target_results_table.txt
 }
 
+
+
+functional_analysis){
+	resources: -c 6 -n cal -t '03:00:00' -m '30gb' -u 1
+	source ~soft_bio_267/initializes/init_degenes_hunter
+	export PATH=~/software/ExpHunterSuite/inst/scripts/:$PATH
+	grep "DB" launch_target_analysis)/results/integrated_miRNA.txt > integrated_miRNA.txt
+	?
+        clusters_to_enrichment.R -p 0.05 -o normal_functional -w 6 -i $input_path/integrated_miRNA.txt -f MF,BP,CC,KEGG,Reactome -O $f_organism -k ENSEMBL -c --showCategories 30 &>func_err  
+        clusters_to_enrichment.R -M S -p 0.05 -o DB_ND -w 6 -i launch_target_analysis)/results/integrated_miRNA.txt -f MF,BP,CC,KEGG,Reactome -O $f_organism -k ENSEMBL -c --showCategories 30 &>func_err_DB_ND  
+
+}
+
 %compare_results){
 	. ~soft_bio_267/initializes/init_R
         metric_tables=`echo !launch_target_analysis_!/results/strategies_stats.txt | tr " " ","`
