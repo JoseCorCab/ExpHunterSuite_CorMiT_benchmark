@@ -6,7 +6,7 @@ launch_target_analysis){
 	ADD_OPT_CORR=`echo "$ADD_OPT_corr" | tr ':' ' ' | tr ";" ","`
 	CORR_THRS=`echo $corr_thrs|tr ":" ","`
 	?
-	coRmiT.R -r $rnaseq_input_path -m $mirnaseq_input_path --organism $organism -R miRNA_target.html -M $multimir_path/parsed_raw_score_$organism.RData -c "'"$CORR_THRS"'" -u 2 -T -o results $ADD_OPT_CORR &>erro_log
+	coRmiT.R --strategies "EE,Eh,Ed,hd,hE,hh" -r $rnaseq_input_path -m $mirnaseq_input_path --organism $organism -R miRNA_target.html -M $multimir_path/parsed_raw_score_$organism.RData -c "'"$CORR_THRS"'" -u 2 -T -o results $ADD_OPT_CORR &>erro_log
 	echo "coRmiT.R -r $rnaseq_input_path -m $mirnaseq_input_path --organism $organism -R miRNA_target.html -M $multimir_path/parsed_raw_score_$organism.RData -c `echo $corr_thrs` -u 2 -T -o results $ADD_OPT_CORR &>erro_log"
 	#add_mirna_mature.R -i  $mirnaseq_input_path/Common_results/hunter_results_table.txt -o results 
 }
@@ -23,7 +23,7 @@ launch_target_analysis){
 
 
 
-functional_analysis){
+%functional_analysis){
 	resources: -c 6 -n cal -t '03:00:00' -m '30gb' -u 1
 	source ~soft_bio_267/initializes/init_degenes_hunter
 	export PATH=~/software/ExpHunterSuite/inst/scripts/:$PATH
