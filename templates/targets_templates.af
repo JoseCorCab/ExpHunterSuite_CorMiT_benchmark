@@ -1,4 +1,4 @@
-launch_target_analysis){
+%launch_target_analysis){
 	resources: -c 15 -n cal -t '03:00:00' -m '20gb' -u 1
 	echo [cpu]
 	source ~soft_bio_267/initializes/init_degenes_hunter
@@ -24,13 +24,13 @@ launch_target_analysis){
 
 
 functional_analysis){
-	resources: -c 6 -n cal -t '03:00:00' -m '30gb' -u 1
+	resources: -c 16 -n cal -t '03:00:00' -m '30gb' -u 1
 	source ~soft_bio_267/initializes/init_degenes_hunter
 	export PATH=~/software/ExpHunterSuite/inst/scripts/:$PATH
 	grep -v FILTERED_OUT  $rnaseq_input_path/Common_results/hunter_results_table.txt | tail -n +2 | cut -f 1 > expressed_genes.txt
 	grep "DB" launch_target_analysis)/results/integrated_miRNA.txt | sed 's/_DB//g'> integrated_miRNA.txt
 	?
-        clusters_to_enrichment.R -p 0.05 -o normal_functional -w 6 -U expressed_genes.txt -i integrated_miRNA.txt -f MF,BP,CC,KEGG,Reactome -O $f_organism -k ENSEMBL -c --showCategories 30 &>func_err  
+        clusters_to_enrichment.R -p $F_pval -o normal_functional -w [cpu] -U expressed_genes.txt -i integrated_miRNA.txt -f MF,BP,CC,KEGG,Reactome -O $f_organism -k ENSEMBL -c --showCategories 30 &>func_err  
         #/usr/bin/time -o process_data_DB_ND -v clusters_to_enrichment.R -M S -p 0.05 -o DB_ND -w 6 -i launch_target_analysis)/results/integrated_miRNA.txt -f MF,BP,CC,KEGG,Reactome -O $f_organism -k ENSEMBL -c --showCategories 30 &>func_err_DB_ND  
 
 }
