@@ -33,6 +33,7 @@ elif [ "$module" == "1" ] ; then
 	\\$f_organism=$F_organism,
 	\\$ADD_OPT_enrichment=$Add_opt_enr,
 	\\$REPORT_TEMPLATES_FOLDER=$report_template_folder,
+	\\$F_pval=$f_pval
 	" | tr -d [:space:]`
 
 	AutoFlow -e -w $CODE_PATH/templates/targets_templates.af -V $AF_VARS -o $output $ADD_OPTIONS
