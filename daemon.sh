@@ -27,15 +27,18 @@ elif [ "$module" == "1" ] ; then
 	\\$multimir_path=$Multimir_path,
 	\\$rnaseq_input_path=$RNAseq_input,
 	\\$mirnaseq_input_path=$miRNA_seq_input,
+	\\$corr_thrs=$CORR_THR,
 	\\$organism=$Organism,
 	\\$ADD_OPT_corr=$Add_opt_corr,
-	\\$corr_thrs=$CORR_THR,
+	\\$FUNSYS=$funsys,
 	\\$f_organism=$F_organism,
 	\\$ADD_OPT_enrichment=$Add_opt_enr,
-	\\$REPORT_TEMPLATES_FOLDER=$report_template_folder,
 	\\$F_pval=$f_pval
 	" | tr -d [:space:]`
 
+echo "
+	AutoFlow -e -w $CODE_PATH/templates/targets_templates.af -V $AF_VARS -o $output $ADD_OPTIONS
+"
 	AutoFlow -e -w $CODE_PATH/templates/targets_templates.af -V $AF_VARS -o $output $ADD_OPTIONS
 
 elif [ "$module" == "2" ] ; then
