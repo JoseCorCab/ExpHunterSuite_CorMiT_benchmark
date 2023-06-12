@@ -36,9 +36,6 @@ elif [ "$module" == "1" ] ; then
 	\\$F_pval=$f_pval
 	" | tr -d [:space:]`
 
-echo "
-	AutoFlow -e -w $CODE_PATH/templates/targets_templates.af -V $AF_VARS -o $output $ADD_OPTIONS
-"
 	AutoFlow -e -w $CODE_PATH/templates/targets_templates.af -V $AF_VARS -o $output $ADD_OPTIONS
 
 elif [ "$module" == "2" ] ; then
