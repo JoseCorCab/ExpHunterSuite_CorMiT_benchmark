@@ -2,7 +2,6 @@ launch_target_analysis){
 	resources: -c 1 -n cal -t '03:00:00' -m '20gb' -u 1
 	echo [cpu]
 	source ~soft_bio_267/initializes/init_degenes_hunter
-	 export PATH=~/software/ExpHunterSuite/inst/scripts/:$PATH
 	ADD_OPT_CORR=`echo "$ADD_OPT_corr" | tr ':' ' ' | tr ";" ","`
 	CORR_THRS=`echo $corr_thrs|tr ":" ","`
 	?
