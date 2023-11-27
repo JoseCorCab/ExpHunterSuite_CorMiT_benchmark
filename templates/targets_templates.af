@@ -2,10 +2,13 @@ launch_target_analysis){
 	resources: -c 1 -n cal -t '03:00:00' -m '20gb' -u 1
 	echo [cpu]
 	source ~soft_bio_267/initializes/init_degenes_hunter
+	strats=`echo "$STRATEGIES" | tr ':' ','`
 	ADD_OPT_CORR=`echo "$ADD_OPT_corr" | tr ':' ' ' | tr ";" ","`
 	CORR_THRS=`echo $corr_thrs|tr ":" ","`
-	?
-	coRmiT.R --strategies "EE,Eh,Ed,hd,hE,hh" -r $rnaseq_input_path -m $mirnaseq_input_path --organism $organism -R miRNA_target.html -M $multimir_path/parsed_raw_score_$organism.RData -c "'"$CORR_THRS"'" -u 2 -T -o results $ADD_OPT_CORR &>erro_log
+	echo $strats
+	exit	
+?
+	coRmiT.R --strategies $strats -r $rnaseq_input_path -m $mirnaseq_input_path --organism $organism -R miRNA_target.html -M $multimir_path/parsed_raw_score_$organism.RData -c "'"$CORR_THRS"'" -u 2 -T -o results $ADD_OPT_CORR &>erro_log
 	add_mirna_mature.R -i  $mirnaseq_input_path/Common_results/hunter_results_table.txt -o results 
 }
 
@@ -29,8 +32,8 @@ functional_analysis){
 	grep -v FILTERED_OUT $rnaseq_input_path/Common_results/hunter_results_table.txt | tail -n +2 | cut -f 1 > expressed_genes.txt
 	grep "DB" launch_target_analysis)/results/integrated_miRNA.txt | sed 's/_DB//g'> database_mtps.txt
 	?
-        clusters_to_enrichment.R -p $F_pval -o DB_functional -w [cpu] -U expressed_genes.txt -i database_mtps.txt -f $funsys -O $f_organism -k ENSEMBL -c --showCategories 10 $ADD_opt_enrichment &>func_err  
-        /usr/bin/time -o process_data_DB_ND -v clusters_to_enrichment.R -M S -p $F_pval -o DB_ND_functional -w [cpu] -i launch_target_analysis)/results/integrated_miRNA.txt -f $funsys -O $f_organism -k ENSEMBL -c --showCategories 10 $ADD_opt_enrichment  &>func_err_DB_ND  
+        clusters_to_enrichment.R -p $F_pval -o DB_functional -w [cpu] -U expressed_genes.txt -i database_mtps.txt -f $funsys -O $f_organism -k ENSEMBL $ADD_opt_enrichment &>func_err  
+        /usr/bin/time -o process_data_DB_ND -v clusters_to_enrichment.R -M S -p $F_pval -o DB_ND_functional -w [cpu] -i launch_target_analysis)/results/integrated_miRNA.txt -f $funsys -O $f_organism -k ENSEMBL $ADD_opt_enrichment  &>func_err_DB_ND  
 }
 
 

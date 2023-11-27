@@ -33,7 +33,8 @@ elif [ "$module" == "1" ] ; then
 	\\$FUNSYS=$funsys,
 	\\$f_organism=$F_organism,
 	\\$ADD_OPT_enrichment=$Add_opt_enr,
-	\\$F_pval=$f_pval
+	\\$F_pval=$f_pval,
+	\\$STRATEGIES=$strategies
 	" | tr -d [:space:]`
 
 	AutoFlow -e -w $CODE_PATH/templates/targets_templates.af -V $AF_VARS -o $output $ADD_OPTIONS
