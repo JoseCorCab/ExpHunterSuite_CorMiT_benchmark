@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 source ~soft_bio_267/initializes/init_autoflow
-CODE_PATH=`pwd`
+export CODE_PATH=`pwd`
 ADD_OPTIONS=$2
 module=$1
 report_template_folder=$CODE_PATH/templates
@@ -39,7 +39,6 @@ elif [ "$module" == "1" ] ; then
 
 	AutoFlow -e -w $CODE_PATH/templates/targets_templates.af -V $AF_VARS -o $output $ADD_OPTIONS
 
-elif [ "$module" == "2" ] ; then
-	sbatch $CODE_PATH/launch_functional.sh
-	#$CODE_PATH/launch_functional.sh
+elif [ "$module" == "report" ] ; then
+	create_cormit_report.sh
 fi
