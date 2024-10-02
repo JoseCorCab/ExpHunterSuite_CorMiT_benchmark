@@ -24,7 +24,6 @@ elif [ "$module" == "1" ] ; then
 
 
 	AF_VARS=`echo "
-	\\$multimir_path=$Multimir_path,
 	\\$rnaseq_input_path=$RNAseq_input,
 	\\$mirnaseq_input_path=$miRNA_seq_input,
 	\\$corr_thrs=$CORR_THR,

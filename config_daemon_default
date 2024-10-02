@@ -1,6 +1,5 @@
 export output=$CODE_PATH/exec
 
-export Multimir_path="" #~josecordoba/proyectos/multimir_db/p_hsa o ~josecordoba/proyectos/multimir_db/p_mmu
 export RNAseq_input=''
 export miRNA_seq_input=''
 export strategies="EE:Eh:Ed:hd:hE:hh"
